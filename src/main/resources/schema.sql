@@ -12,4 +12,4 @@ create table `links`
 );
 
 insert into links (id, url, keyword)
-values (1, 'rookiefly.com', '1');
+values (1, 'rookiefly.com', '000001');

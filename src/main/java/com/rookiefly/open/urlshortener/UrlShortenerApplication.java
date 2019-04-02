@@ -20,6 +20,6 @@ public class UrlShortenerApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
-        System.out.println(this.linksMapper.findByKeyword("1"));
+        System.out.println(this.linksMapper.findByKeyword("000001"));
     }
 }
