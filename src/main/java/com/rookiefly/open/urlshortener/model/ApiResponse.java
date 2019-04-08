@@ -25,7 +25,21 @@ public class ApiResponse implements Serializable {
         this.code = code;
     }
 
+    public ApiResponse(Integer code, String msg) {
+        this.code = code;
+        this.msg = msg
+        ;
+    }
+
     public static ApiResponse newSuccess() {
         return new ApiResponse(200);
+    }
+
+    public static ApiResponse newParamError() {
+        return new ApiResponse(400, "参数错误");
+    }
+
+    public static ApiResponse newNotFound() {
+        return new ApiResponse(404, "链接不存在");
     }
 }

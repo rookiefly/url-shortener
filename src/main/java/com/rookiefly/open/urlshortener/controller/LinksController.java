@@ -1,7 +1,9 @@
 package com.rookiefly.open.urlshortener.controller;
 
-import com.rookiefly.open.urlshortener.mapper.LinksMapper;
 import com.rookiefly.open.urlshortener.model.ApiResponse;
+import com.rookiefly.open.urlshortener.model.Links;
+import com.rookiefly.open.urlshortener.service.LinksService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -14,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class LinksController {
 
     @Autowired
-    private LinksMapper linksMapper;
+    private LinksService linksService;
 
     /**
      * 短链接生成接口
@@ -25,7 +27,15 @@ public class LinksController {
     @RequestMapping(value = "/admin/shorten", method = RequestMethod.POST)
 
     public ApiResponse generateShortUrl(String url) {
-        return ApiResponse.newSuccess();
+        if (StringUtils.isEmpty(url)) {
+            return ApiResponse.newParamError();
+        }
+        Links links = new Links();
+        links.setUrl(url);
+        String shortUrl = linksService.insertLongUrl(links);
+        ApiResponse response = ApiResponse.newSuccess();
+        response.setShortUrl(shortUrl);
+        return response;
     }
 
     /**
@@ -36,6 +46,15 @@ public class LinksController {
      */
     @RequestMapping(value = "/admin/query", method = RequestMethod.POST)
     public ApiResponse queryShortUrl(String shortUrl) {
-        return ApiResponse.newSuccess();
+        if (StringUtils.isEmpty(shortUrl)) {
+            return ApiResponse.newParamError();
+        }
+        String longUrl = linksService.queryByShortUrl(shortUrl);
+        if (StringUtils.isEmpty(longUrl)) {
+            return ApiResponse.newNotFound();
+        }
+        ApiResponse response = ApiResponse.newSuccess();
+        response.setLongUrl(longUrl);
+        return response;
     }
 }

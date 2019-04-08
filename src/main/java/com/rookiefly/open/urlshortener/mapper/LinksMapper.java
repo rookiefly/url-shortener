@@ -14,6 +14,9 @@ public interface LinksMapper {
     @Select("select * from links where keyword = #{keyword}")
     Links findByKeyword(@Param("keyword") String keyword);
 
+    @Select("select * from links where url = #{url}")
+    Links findByUrl(@Param("url") String url);
+
     @Insert("insert into links(url, keyword) values(#{url}, #{keyword})")
     //添加该行，links中的id将被自动设置
     @Options(useGeneratedKeys = true, keyProperty = "id")
