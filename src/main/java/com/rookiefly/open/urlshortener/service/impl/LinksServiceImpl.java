@@ -24,7 +24,11 @@ public class LinksServiceImpl implements LinksService {
         if (StringUtils.isEmpty(keyword)) {
             return null;
         }
-        return linksMapper.findByKeyword(keyword).getUrl();
+        Links links = linksMapper.findByKeyword(keyword);
+        if (links == null) {
+            return null;
+        }
+        return links.getUrl();
     }
 
     @Override

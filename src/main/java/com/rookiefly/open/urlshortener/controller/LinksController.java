@@ -5,6 +5,7 @@ import com.rookiefly.open.urlshortener.model.Links;
 import com.rookiefly.open.urlshortener.service.LinksService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * 短链接API接口
  */
+@CrossOrigin(origins = "*", methods = RequestMethod.POST)
 @RestController
 public class LinksController {
 
