@@ -15,6 +15,15 @@ public class ConversionUtil {
     private static int scale = 62;
 
     /**
+     * 将数字转为62进制，默认长度6
+     *
+     * @param num    Long 型数字
+     * @return 62进制字符串
+     */
+    public static String encode(long num) {
+        return encode(num, 6);
+    }
+    /**
      * 将数字转为62进制
      *
      * @param num    Long 型数字

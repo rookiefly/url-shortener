@@ -1,6 +1,8 @@
 package com.rookiefly.open.urlshortener.controller;
 
+import com.rookiefly.open.urlshortener.mapper.LinksMapper;
 import com.rookiefly.open.urlshortener.model.ApiResponse;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,6 +13,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class LinksController {
 
+    @Autowired
+    private LinksMapper linksMapper;
+
     /**
      * 短链接生成接口
      *
@@ -18,6 +23,7 @@ public class LinksController {
      * @return 短链接url
      */
     @RequestMapping(value = "/admin/shorten", method = RequestMethod.POST)
+
     public ApiResponse generateShortUrl(String url) {
         return ApiResponse.newSuccess();
     }
