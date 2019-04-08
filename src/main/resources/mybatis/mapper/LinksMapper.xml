@@ -4,6 +4,6 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.rookiefly.open.urlshortener.mapper.LinksMapper">
     <select id="selectById" resultType="Links">
-        select * from hotel where id = #{id}
+        select * from links where id = #{id}
     </select>
 </mapper>
