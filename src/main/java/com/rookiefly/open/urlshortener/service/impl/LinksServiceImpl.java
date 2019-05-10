@@ -7,6 +7,7 @@ import com.rookiefly.open.urlshortener.util.ConversionUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -19,6 +20,7 @@ public class LinksServiceImpl implements LinksService {
     private LinksMapper linksMapper;
 
     @Override
+    @Cacheable(value = "urlCache", key = "targetClass + methodName + #shortUrl")
     public String queryByShortUrl(String shortUrl) {
         String keyword = StringUtils.substringAfterLast(shortUrl, "/");
         if (StringUtils.isEmpty(keyword)) {
