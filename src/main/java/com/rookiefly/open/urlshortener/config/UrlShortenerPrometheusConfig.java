@@ -11,8 +11,8 @@ public class UrlShortenerPrometheusConfig {
 
     @Bean
     MeterRegistryCustomizer<MeterRegistry> configurer(
-            @Value("${spring.application.name}") String applicationName) {
-        return (registry) -> registry.config().commonTags("application", applicationName);
+            @Value("${spring.application.name}") String applicationName, @Value("${spring.datasource.hikari.poolName}") String hikariPoolName) {
+        return (registry) -> registry.config().commonTags("application", applicationName, "hikaricp", hikariPoolName);
     }
 
 }

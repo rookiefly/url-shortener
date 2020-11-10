@@ -2,6 +2,7 @@ package com.rookiefly.open.urlshortener.controller;
 
 import com.rookiefly.open.urlshortener.model.ApiResponse;
 import com.rookiefly.open.urlshortener.model.Links;
+import com.rookiefly.open.urlshortener.monitor.PrometheusCustomMonitor;
 import com.rookiefly.open.urlshortener.service.LinksService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,8 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.annotation.Resource;
 
 /**
  * 短链接API接口
@@ -20,6 +23,9 @@ public class LinksController {
     @Autowired
     private LinksService linksService;
 
+    @Resource
+    private PrometheusCustomMonitor monitor;
+
     /**
      * 短链接生成接口
      *
@@ -27,7 +33,6 @@ public class LinksController {
      * @return 短链接url
      */
     @RequestMapping(value = "/admin/shorten", method = RequestMethod.POST)
-
     public ApiResponse generateShortUrl(String url) {
         if (StringUtils.isEmpty(url)) {
             return ApiResponse.newParamError();
@@ -37,6 +42,7 @@ public class LinksController {
         String shortUrl = linksService.insertLongUrl(links);
         ApiResponse response = ApiResponse.newSuccess();
         response.setShortUrl(shortUrl);
+        monitor.getGenerateShortUrlCount().increment();
         return response;
     }
 
