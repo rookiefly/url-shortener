@@ -5,10 +5,13 @@ import com.rookiefly.open.urlshortener.model.Links;
 import com.rookiefly.open.urlshortener.service.LinksService;
 import com.rookiefly.open.urlshortener.util.ConversionUtil;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
 
 @Service
 public class LinksServiceImpl implements LinksService {
@@ -16,8 +19,11 @@ public class LinksServiceImpl implements LinksService {
     @Value("${url-shortener.baseurl}")
     private String baseUrl;
 
-    @Autowired
+    @Resource
     private LinksMapper linksMapper;
+
+    @Resource
+    private RocketMQTemplate rocketMQTemplate;
 
     @Override
     @Cacheable(value = "urlCache", key = "targetClass + methodName + #shortUrl")
@@ -47,6 +53,8 @@ public class LinksServiceImpl implements LinksService {
         long id = links.getId().longValue();
         String keyword = ConversionUtil.encode(id, 6);
         linksMapper.update(keyword, id);
-        return baseUrl + keyword;
+        String shortUrl = baseUrl + keyword;
+        rocketMQTemplate.send("url-shortener-topic", MessageBuilder.withPayload(shortUrl).build());
+        return shortUrl;
     }
 }
