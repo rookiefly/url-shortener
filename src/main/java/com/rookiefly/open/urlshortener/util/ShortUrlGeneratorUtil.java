@@ -9,7 +9,7 @@ import java.util.Random;
 public class ShortUrlGeneratorUtil {
 
     public static void main(String[] args) {
-        String sLongUrl = "http://www.baidu.com";
+        String sLongUrl = "https://rookiefly.github.io";
         System.out.println(shortUrl(sLongUrl));
     }
 

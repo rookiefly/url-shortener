@@ -1,0 +1,32 @@
+version: "3.5"
+services:
+  mysqldb:
+    image: mysql:5.7
+    container_name: mysql
+    volumes:
+      - ./mysql-data:/var/lib/mysql
+      - ./mysql-init-files:/docker-entrypoint-initdb.d
+    #restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: shorturl
+      MYSQL_USER: rookiefly
+      MYSQL_PASSWORD: rookiefly
+    ports:
+      - "3306:3306"
+    networks:
+      - mysql-net
+  redis:
+    image: redis:latest
+    container_name: redis
+    volumes:
+      - ./redis-data:/data
+    ports:
+      - "6379:6379"
+    #restart: always
+    networks:
+      - mysql-net
+networks:
+  mysql-net:
+    name: mysql-net
+    driver: bridge
