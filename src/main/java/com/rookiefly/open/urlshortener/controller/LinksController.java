@@ -39,7 +39,7 @@ public class LinksController {
         }
         Links links = new Links();
         links.setUrl(url);
-        String shortUrl = linksService.insertLongUrl(links);
+        String shortUrl = linksService.insertShortUrl(links);
         ApiResponse response = ApiResponse.newSuccess();
         response.setShortUrl(shortUrl);
         monitor.getGenerateShortUrlCount().increment();

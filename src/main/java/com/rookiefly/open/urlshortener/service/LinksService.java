@@ -9,5 +9,5 @@ public interface LinksService {
 
     String queryByShortUrl(String shortUrl);
 
-    String insertLongUrl(Links links);
+    String insertShortUrl(Links links);
 }

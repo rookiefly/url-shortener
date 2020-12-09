@@ -1,7 +1,7 @@
 package com.rookiefly.open.urlshortener.controller;
 
 import com.rookiefly.open.urlshortener.monitor.PrometheusCustomMonitor;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -14,7 +14,7 @@ public class OrderController {
     @Resource
     private PrometheusCustomMonitor monitor;
 
-    @RequestMapping("/test/order")
+    @GetMapping("/test/order")
     public String order(@RequestParam(defaultValue = "0") String flag) throws Exception {
         // 统计下单次数
         monitor.getOrderCount().increment();
