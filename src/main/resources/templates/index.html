@@ -4,15 +4,15 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="URL Shortener with Python Flask, Bootstrap, API Gateway, Lambda and DynamoDB">
-    <meta name="author" content="Ruan Bekker">
-    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+    <meta name="description" content="URL ShortenerURL Shortener with SpringBoot">
+    <meta name="author" content="rookiefly">
 
     <title>短链接生成</title>
 
-    <link href="https://getbootstrap.com/docs/3.3/examples/justified-nav/justified-nav.css" rel="stylesheet">
-    <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.5.3/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.15.2/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/clipboard.js/2.0.6/clipboard.js"></script>
 
     <style>
         heading {
@@ -21,26 +21,57 @@
         }
     </style>
 
+    <script type="text/javascript">
+        $(function () {
+            new ClipboardJS('.btn');
+            $('#submitShortenBtn').click(function () {
+                $.ajax({
+                    type: "POST",
+                    url: "api/shorten",
+                    data: $("form#submitShortenForm").serialize(),
+                    success: function (data) {
+                        console.log(data);
+                        $('#copyShortUrlDiv').show();
+                        $('#shortUrlInput').val(data.shortUrl);
+                    }
+                });
+                return false;
+            });
+        });
+    </script>
 </head>
 
 <body>
 <div class="container">
 
+
     <div class="jumbotron">
         <heading>短链接生成</heading>
     </div>
 
-    <form action="/shorten" method="post">
-        <div class="input-group">
-            <input type="text" class="form-control input-lg" name="longUrl" placeholder="your link to shorten"
+    <form id="submitShortenForm">
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" name="longUrl" placeholder="your link to shorten"
                    autocomplete="off" autofocus>
-            <div class="input-group-btn">
-                <button class="btn btn-primary btn-lg" type="submit">
+            <div class="input-group-append">
+                <button id="submitShortenBtn" class="btn btn-outline-secondary" type="button">
                     <i class="fas fa-magic"></i>
                 </button>
             </div>
         </div>
     </form>
+
+    <div id="copyShortUrlDiv" class="input-group mb-3" style="display: none">
+        <input type="text" class="form-control" id="shortUrlInput" name="input" value=""
+               autocomplete="off"
+               autofocus>
+        <div class="input-group-append">
+            <button class="btn btn-outline-secondary" data-clipboard-action="copy"
+                    data-clipboard-target="#shortUrlInput">
+                <i class="fas fa-copy"></i>
+            </button>
+        </div>
+    </div>
 
 </div>
 </body>

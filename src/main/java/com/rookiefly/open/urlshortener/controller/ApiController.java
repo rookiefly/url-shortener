@@ -29,16 +29,16 @@ public class ApiController {
     /**
      * 短链接生成接口
      *
-     * @param url 原始url
+     * @param longUrl 原始url
      * @return 短链接url
      */
     @RequestMapping(value = "/api/shorten", method = RequestMethod.POST)
-    public ApiResponse generateShortUrl(String url) {
-        if (StringUtils.isEmpty(url)) {
+    public ApiResponse generateShortUrl(String longUrl) {
+        if (StringUtils.isEmpty(longUrl)) {
             return ApiResponse.newParamError();
         }
         Links links = new Links();
-        links.setUrl(url);
+        links.setUrl(longUrl);
         String shortUrl = linksService.insertShortUrl(links);
         ApiResponse response = ApiResponse.newSuccess();
         response.setShortUrl(shortUrl);
