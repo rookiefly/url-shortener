@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="URL Shortener with Python Flask, Bootstrap, API Gateway, Lambda and DynamoDB">
+    <meta name="author" content="Ruan Bekker">
+
+    <title>短链接生成</title>
+
+    <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.15.2/css/all.min.css" rel="stylesheet">
+
+    <style>
+        heading {
+            font-family: 'Raleway', sans-serif;
+            font-size: 46px;
+        }
+    </style>
+
+</head>
+<body>
+
+<div class="container">
+    <div class="jumbotron">
+        <heading>短链接生成</heading>
+    </div>
+
+    <script type="text/javascript" th:src="@{/js/clipboard.js}"></script>
+
+    <div class="input-group">
+        <input type="text" class="form-control input-lg" id="input" name="input" th:value="${shortUrl}"
+               autocomplete="off"
+               autofocus>
+        <div class="input-group-btn">
+            <button class="btn btn-primary btn-lg" onclick="copyToClipboard()" type="submit">
+                <i class="fas fa-link"></i>
+            </button>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

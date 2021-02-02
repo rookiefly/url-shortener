@@ -18,7 +18,7 @@ import javax.annotation.Resource;
  */
 @CrossOrigin(origins = "*", methods = RequestMethod.POST)
 @RestController
-public class LinksController {
+public class ApiController {
 
     @Autowired
     private LinksService linksService;
@@ -32,7 +32,7 @@ public class LinksController {
      * @param url 原始url
      * @return 短链接url
      */
-    @RequestMapping(value = "/admin/shorten", method = RequestMethod.POST)
+    @RequestMapping(value = "/api/shorten", method = RequestMethod.POST)
     public ApiResponse generateShortUrl(String url) {
         if (StringUtils.isEmpty(url)) {
             return ApiResponse.newParamError();
@@ -52,7 +52,7 @@ public class LinksController {
      * @param shortUrl 短链接url
      * @return 原始url
      */
-    @RequestMapping(value = "/admin/query", method = RequestMethod.POST)
+    @RequestMapping(value = "/api/query", method = RequestMethod.POST)
     public ApiResponse queryShortUrl(String shortUrl) {
         if (StringUtils.isEmpty(shortUrl)) {
             return ApiResponse.newParamError();

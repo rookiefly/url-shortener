@@ -23,9 +23,6 @@ public class LinksServiceImpl implements LinksService {
     @Resource
     private LinksMapper linksMapper;
 
-/*    @Resource
-    private RocketMQTemplate rocketMQTemplate;*/
-
     @Resource
     private ShortUrlGeneratorStrategy shortUrlGeneratorStrategy;
 
@@ -53,7 +50,6 @@ public class LinksServiceImpl implements LinksService {
             String keyword = shortUrlGeneratorStrategy.getStrategy(strategy).shortUrl(longUrl);
             links.setKeyword(keyword);
             linksMapper.insertLinks(links);
-            //rocketMQTemplate.send("url-shortener-topic", MessageBuilder.withPayload(shortUrl).build());
             return baseUrl + keyword;
         }
     }
