@@ -13,11 +13,16 @@
     <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.15.2/css/all.min.css" rel="stylesheet">
     <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.bootcdn.net/ajax/libs/clipboard.js/2.0.6/clipboard.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.5.3/js/bootstrap.min.js"></script>
 
     <style>
         heading {
             font-family: 'Raleway', sans-serif;
             font-size: 46px;
+        }
+
+        .top-buffer {
+            margin-top: 30px;
         }
     </style>
 
@@ -37,6 +42,20 @@
                 });
                 return false;
             });
+
+            $('#submitRestoreBtn').click(function () {
+                $.ajax({
+                    type: "POST",
+                    url: "api/restore",
+                    data: $("form#submitRestoreForm").serialize(),
+                    success: function (data) {
+                        console.log(data);
+                        $('#copyLongUrlDiv').show();
+                        $('#longUrlInput').val(data.longUrl);
+                    }
+                });
+                return false;
+            });
         });
     </script>
 </head>
@@ -49,27 +68,66 @@
         <heading>短链接生成</heading>
     </div>
 
-    <form id="submitShortenForm">
-        <div class="input-group mb-3">
-            <input type="text" class="form-control" name="longUrl" placeholder="your link to shorten"
-                   autocomplete="off" autofocus>
-            <div class="input-group-append">
-                <button id="submitShortenBtn" class="btn btn-outline-secondary" type="button">
-                    <i class="fas fa-magic"></i>
-                </button>
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+            <a class="nav-link active" id="shorten-tab" data-toggle="tab" href="#shorten" role="tab"
+               aria-controls="shorten" aria-selected="true">缩短网址</a>
+        </li>
+        <li class="nav-item" role="presentation">
+            <a class="nav-link" id="restore-tab" data-toggle="tab" href="#restore" role="tab" aria-controls="query"
+               aria-selected="false">还原网址</a>
+        </li>
+    </ul>
+    <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="shorten" role="tabpanel" aria-labelledby="shorten-tab">
+            <form id="submitShortenForm" class="top-buffer">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" name="longUrl" placeholder="your link to shorten"
+                           autocomplete="off" autofocus>
+                    <div class="input-group-append">
+                        <button id="submitShortenBtn" class="btn btn-outline-secondary" type="button">
+                            <i class="fas fa-magic"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+
+            <div id="copyShortUrlDiv" class="input-group mb-3 top-buffer" style="display: none">
+                <input type="text" class="form-control" id="shortUrlInput" name="input" value=""
+                       autocomplete="off"
+                       autofocus>
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" data-clipboard-action="copy"
+                            data-clipboard-target="#shortUrlInput">
+                        <i class="fas fa-copy"></i>
+                    </button>
+                </div>
             </div>
         </div>
-    </form>
 
-    <div id="copyShortUrlDiv" class="input-group mb-3" style="display: none">
-        <input type="text" class="form-control" id="shortUrlInput" name="input" value=""
-               autocomplete="off"
-               autofocus>
-        <div class="input-group-append">
-            <button class="btn btn-outline-secondary" data-clipboard-action="copy"
-                    data-clipboard-target="#shortUrlInput">
-                <i class="fas fa-copy"></i>
-            </button>
+        <div class="tab-pane fade" id="restore" role="tabpanel" aria-labelledby="restore-tab">
+            <form id="submitRestoreForm" class="top-buffer">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" name="shortUrl" placeholder="your link to restore"
+                           autocomplete="off" autofocus>
+                    <div class="input-group-append">
+                        <button id="submitRestoreBtn" class="btn btn-outline-secondary" type="button">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+            <div id="copyLongUrlDiv" class="input-group mb-3 top-buffer" style="display: none">
+                <input type="text" class="form-control" id="longUrlInput" name="input" value=""
+                       autocomplete="off"
+                       autofocus>
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" data-clipboard-action="copy"
+                            data-clipboard-target="#longUrlInput">
+                        <i class="fas fa-copy"></i>
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 

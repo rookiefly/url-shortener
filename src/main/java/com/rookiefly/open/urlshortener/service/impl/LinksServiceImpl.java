@@ -28,7 +28,7 @@ public class LinksServiceImpl implements LinksService {
 
     @Override
     @Cacheable(value = "urlCache", key = "targetClass + methodName + #shortUrl")
-    public String queryByShortUrl(String shortUrl) {
+    public String restoreShortUrl(String shortUrl) {
         String keyword = StringUtils.substringAfterLast(shortUrl, "/");
         if (StringUtils.isEmpty(keyword)) {
             return null;

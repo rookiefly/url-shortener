@@ -52,12 +52,12 @@ public class ApiController {
      * @param shortUrl 短链接url
      * @return 原始url
      */
-    @RequestMapping(value = "/api/query", method = RequestMethod.POST)
-    public ApiResponse queryShortUrl(String shortUrl) {
+    @RequestMapping(value = "/api/restore", method = RequestMethod.POST)
+    public ApiResponse restoreShortUrl(String shortUrl) {
         if (StringUtils.isEmpty(shortUrl)) {
             return ApiResponse.newParamError();
         }
-        String longUrl = linksService.queryByShortUrl(shortUrl);
+        String longUrl = linksService.restoreShortUrl(shortUrl);
         if (StringUtils.isEmpty(longUrl)) {
             return ApiResponse.newNotFound();
         }

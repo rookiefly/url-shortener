@@ -7,7 +7,7 @@ import com.rookiefly.open.urlshortener.model.Links;
  */
 public interface LinksService {
 
-    String queryByShortUrl(String shortUrl);
+    String restoreShortUrl(String shortUrl);
 
     String insertShortUrl(Links links);
 }
