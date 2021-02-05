@@ -14,6 +14,7 @@
     <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.bootcdn.net/ajax/libs/clipboard.js/2.0.6/clipboard.js"></script>
     <script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.5.3/js/bootstrap.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
     <style>
         heading {
@@ -23,6 +24,15 @@
 
         .top-buffer {
             margin-top: 30px;
+        }
+
+        .row {
+            overflow: hidden;
+        }
+
+        [class*="col-"] {
+            margin-bottom: -99999px;
+            padding-bottom: 99999px;
         }
     </style>
 
@@ -38,6 +48,7 @@
                         console.log(data);
                         $('#copyShortUrlDiv').show();
                         $('#shortUrlInput').val(data.shortUrl);
+                        new QRCode(document.getElementById("qrcode"), data.shortUrl);
                     }
                 });
                 return false;
@@ -92,16 +103,19 @@
                 </div>
             </form>
 
-            <div id="copyShortUrlDiv" class="input-group mb-3 top-buffer" style="display: none">
-                <input type="text" class="form-control" id="shortUrlInput" name="input" value=""
-                       autocomplete="off"
-                       autofocus>
-                <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" data-clipboard-action="copy"
-                            data-clipboard-target="#shortUrlInput">
-                        <i class="fas fa-copy"></i>
-                    </button>
+            <div class="row">
+                <div id="copyShortUrlDiv" class="col-sm input-group mb-3 top-buffer" style="display: none">
+                    <input type="text" class="form-control" id="shortUrlInput" name="input" value=""
+                           autocomplete="off"
+                           autofocus>
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" data-clipboard-action="copy"
+                                data-clipboard-target="#shortUrlInput">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                    </div>
                 </div>
+                <div class="col-sm" id="qrcode"></div>
             </div>
         </div>
 
