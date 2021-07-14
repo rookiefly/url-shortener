@@ -1,4 +1,4 @@
-package com.rookiefly.open.urlshortener.stratge;
+package com.rookiefly.open.urlshortener.strategy;
 
 import com.rookiefly.open.urlshortener.service.ShortUrlGeneratorService;
 import org.springframework.stereotype.Service;

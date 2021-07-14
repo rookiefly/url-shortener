@@ -3,7 +3,7 @@ package com.rookiefly.open.urlshortener.service.impl;
 import com.rookiefly.open.urlshortener.mapper.LinksMapper;
 import com.rookiefly.open.urlshortener.model.Links;
 import com.rookiefly.open.urlshortener.service.LinksService;
-import com.rookiefly.open.urlshortener.stratge.ShortUrlGeneratorStrategy;
+import com.rookiefly.open.urlshortener.strategy.ShortUrlGeneratorStrategy;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.Cacheable;

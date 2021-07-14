@@ -5,9 +5,8 @@ import com.rookiefly.open.urlshortener.model.Links;
 import com.rookiefly.open.urlshortener.monitor.PrometheusCustomMonitor;
 import com.rookiefly.open.urlshortener.service.LinksService;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,7 +19,7 @@ import javax.annotation.Resource;
 @RestController
 public class ApiController {
 
-    @Autowired
+    @Resource
     private LinksService linksService;
 
     @Resource
@@ -32,7 +31,7 @@ public class ApiController {
      * @param longUrl 原始url
      * @return 短链接url
      */
-    @RequestMapping(value = "/api/shorten", method = RequestMethod.POST)
+    @GetMapping(value = "/api/shorten")
     public ApiResponse generateShortUrl(String longUrl) {
         if (StringUtils.isEmpty(longUrl)) {
             return ApiResponse.newParamError();
@@ -52,7 +51,7 @@ public class ApiController {
      * @param shortUrl 短链接url
      * @return 原始url
      */
-    @RequestMapping(value = "/api/restore", method = RequestMethod.POST)
+    @GetMapping(value = "/api/restore")
     public ApiResponse restoreShortUrl(String shortUrl) {
         if (StringUtils.isEmpty(shortUrl)) {
             return ApiResponse.newParamError();

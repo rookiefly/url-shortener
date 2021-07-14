@@ -1,0 +1,64 @@
+jasypt:
+  encryptor:
+    algorithm: PBEWITHHMACSHA512ANDAES_256
+    ivGeneratorClassname: org.jasypt.iv.RandomIvGenerator
+logging:
+  level:
+    com.rookiefly.open.urlshortener.mapper: TRACE
+    root: info
+management:
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      cors:
+        allowed-methods: GET,POST
+        allowed-origins: '*'
+      exposure:
+        include: '*'
+  metrics:
+    tags:
+      application: ${spring.application.name}
+mybatis:
+  configuration:
+    default-fetch-size: 100
+    default-statement-timeout: 30
+    map-underscore-to-camel-case: true
+  mapper-locations: classpath:mybatis/mapper/*.xml
+  type-aliases-package: com.rookiefly.open.urlshortener.model
+server:
+  port: 8989
+  tomcat:
+    mbeanregistry:
+      enabled: true
+spring:
+  application:
+    name: springboot-urlshortener
+  cache:
+    cache-names: urlCache
+    caffeine:
+      spec: maximumSize=500,expireAfterAccess=600s
+  datasource:
+    hikari:
+      connectionTimeout: 30000
+      idleTimeout: 30000
+      maxLifetime: 2000000
+      maximumPoolSize: 20
+      minimumIdle: 5
+      poolName: urlShortenerHikariCP
+    initialization-mode: ALWAYS
+  thymeleaf:
+    cache: false
+    check-template-location: true
+    encoding: UTF-8
+    mode: HTML
+    prefix: classpath:/templates/
+    suffix: .html
+  profiles:
+    active: dev
+swagger:
+  show: true
+url-shortener:
+  baseurl: http://w9x.top/
+  strategy: hash

@@ -15,7 +15,7 @@ public class UrlShortenerApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
-        System.out.println(args);
+
     }
 
 /*    @Bean

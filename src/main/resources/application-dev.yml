@@ -1,0 +1,20 @@
+spring:
+  datasource:
+    password: ENC(W5p2CjSM+dafOGhlhKaKx3hriew7tlfwYWxdHJwYMdn7Px2o1uCEzsWGEq0UgJlZ)
+    schema: classpath:sql/schema-h2.sql
+    url: jdbc:h2:mem:shorturl;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    username: sa
+  h2:
+    console:
+      enabled: true
+  redis:
+    database: 0
+    host: localhost
+    lettuce:
+      pool:
+        max-active: 10
+        max-idle: 5
+        max-wait: 5000
+    password: ''
+    port: 6379
+    timeout: 3000

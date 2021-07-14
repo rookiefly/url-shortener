@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
+import java.util.Date;
 
 @Getter
 @Setter
@@ -18,7 +18,7 @@ public class Links implements Serializable {
 
     private String keyword; //短链接码
 
-    private Timestamp insertAt; //插入时间
+    private Date gmtCreate; //插入时间
 
-    private Timestamp updatedAt; //更新时间
+    private Date gmtModify; //更新时间
 }
