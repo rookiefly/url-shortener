@@ -41,7 +41,7 @@
             new ClipboardJS('.btn');
             $('#submitShortenBtn').click(function () {
                 $.ajax({
-                    type: "POST",
+                    type: "GET",
                     url: "api/shorten",
                     data: $("form#submitShortenForm").serialize(),
                     success: function (data) {
@@ -56,7 +56,7 @@
 
             $('#submitRestoreBtn').click(function () {
                 $.ajax({
-                    type: "POST",
+                    type: "GET",
                     url: "api/restore",
                     data: $("form#submitRestoreForm").serialize(),
                     success: function (data) {

@@ -17,12 +17,13 @@ public class ConversionUtil {
     /**
      * 将数字转为62进制，默认长度6
      *
-     * @param num    Long 型数字
+     * @param num Long 型数字
      * @return 62进制字符串
      */
     public static String encode(long num) {
         return encode(num, 6);
     }
+
     /**
      * 将数字转为62进制
      *
@@ -38,13 +39,13 @@ public class ConversionUtil {
             /**
              * 对 scale 进行求余，然后将余数追加至 sb 中，由于是从末位开始追加的，因此最后需要反转（reverse）字符串
              */
-            remainder = Long.valueOf(num % scale).intValue();
+            remainder = Math.toIntExact(num % scale);
             sb.append(chars.charAt(remainder));
 
             num = num / scale;
         }
 
-        sb.append(chars.charAt(Long.valueOf(num).intValue()));
+        sb.append(chars.charAt(Math.toIntExact(num)));
         String value = sb.reverse().toString();
         return StringUtils.leftPad(value, length, '0');
     }

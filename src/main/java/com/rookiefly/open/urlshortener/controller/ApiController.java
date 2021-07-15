@@ -15,7 +15,7 @@ import javax.annotation.Resource;
 /**
  * 短链接API接口
  */
-@CrossOrigin(origins = "*", methods = RequestMethod.POST)
+@CrossOrigin(origins = "*", methods = RequestMethod.GET)
 @RestController
 public class ApiController {
 

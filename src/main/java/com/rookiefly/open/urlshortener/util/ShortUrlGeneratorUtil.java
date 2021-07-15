@@ -8,11 +8,6 @@ import java.util.Random;
  */
 public class ShortUrlGeneratorUtil {
 
-    public static void main(String[] args) {
-        String sLongUrl = "https://rookiefly.github.io";
-        System.out.println(shortUrl(sLongUrl));
-    }
-
     public static String shortUrl(String url) {
         // 可以自定义生成 MD5 加密字符传前的混合 KEY
         String key = "rookiefly";

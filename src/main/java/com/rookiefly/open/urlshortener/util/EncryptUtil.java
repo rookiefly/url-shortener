@@ -1,13 +1,16 @@
 package com.rookiefly.open.urlshortener.util;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.security.MessageDigest;
 
+@Slf4j
 public class EncryptUtil {
 
     /**
      * 十六进制下数字到字符的映射数组
      */
-    private final static String[] hexDigits = {"0", "1", "2", "3",
+    private static final String[] hexDigits = {"0", "1", "2", "3",
             "4", "5", "6", "7",
             "8", "9", "A", "B",
             "C", "D", "E", "F"};
@@ -31,10 +34,9 @@ public class EncryptUtil {
             try {
                 MessageDigest md5 = MessageDigest.getInstance("MD5");
                 byte[] results = md5.digest(originString.getBytes());
-                String result = byteArrayToHexString(results);
-                return result;
+                return byteArrayToHexString(results);
             } catch (Exception e) {
-                e.printStackTrace();
+                log.error("encodeByMD5 error", e);
             }
         }
         return null;
@@ -47,9 +49,9 @@ public class EncryptUtil {
      * @return 十六进制字符串
      */
     private static String byteArrayToHexString(byte[] b) {
-        StringBuffer resultSb = new StringBuffer();
-        for (int i = 0; i < b.length; i++) {
-            resultSb.append(byteToHexString(b[i]));
+        StringBuilder resultSb = new StringBuilder();
+        for (byte value : b) {
+            resultSb.append(byteToHexString(value));
         }
         return resultSb.toString();
     }

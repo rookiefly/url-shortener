@@ -58,7 +58,7 @@ spring:
   profiles:
     active: dev
 swagger:
-  show: true
+  open: true
 url-shortener:
   baseurl: http://w9x.top/
   strategy: hash

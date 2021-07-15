@@ -37,7 +37,7 @@ public class OrderIdGeneratorService {
      * @param minLength
      * @return String
      * @Title: generateCode
-     * @Description: 生成自定义前缀的类似 HTG201810120001格式的自增数
+     * @Description: 生成自定义前缀的类似 ORDER201810120001格式的自增数
      */
     public String generateCode(String key, String prefix, boolean hasExpire, Integer minLength) {
         return this.createGenerateCode(key, prefix, hasExpire, minLength);
@@ -61,18 +61,14 @@ public class OrderIdGeneratorService {
                 calendar.set(Calendar.MINUTE, 59);
                 calendar.set(Calendar.SECOND, 59);
                 calendar.set(Calendar.MILLISECOND, 9999);
-                date = calendar.getTime();
             } else {
                 calendar.set(Calendar.MINUTE, calendar.get(Calendar.MINUTE) + 10);
-                date = calendar.getTime();
             }
+            date = calendar.getTime();
             Long id = generateId(key, date);
-            if (id != null) {
-                return format(id, prefix, minLength);
-            }
+            return format(id, prefix, minLength);
         } catch (Exception e) {
-            logger.info("error --> redis 生成自增id出现异常");
-            logger.error(e.getMessage(), e);
+            logger.error("redis生成自增id出现异常", e);
         }
         return null;
     }
@@ -100,7 +96,7 @@ public class OrderIdGeneratorService {
      */
     private String format(Long id, String prefix, Integer minLength) {
 
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         sb.append(prefix);
         DateFormat df = new SimpleDateFormat("yyyyMMdd");
         sb.append(df.format(new Date())).append(StringUtils.leftPad(id.toString(), minLength, "0"));

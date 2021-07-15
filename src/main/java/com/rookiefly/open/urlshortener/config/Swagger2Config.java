@@ -1,7 +1,7 @@
 package com.rookiefly.open.urlshortener.config;
 
 import com.github.xiaoymin.knife4j.spring.annotations.EnableKnife4j;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -19,15 +19,12 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2WebMvc;
 @EnableSwagger2WebMvc
 @EnableKnife4j
 @Import(BeanValidatorPluginsConfiguration.class)
+@ConditionalOnProperty(prefix = "swagger", name = "open", havingValue = "true")
 public class Swagger2Config {
-
-    @Value("${swagger.show}")
-    private boolean swaggerShow;
 
     @Bean
     public Docket createRestApi() {
         return new Docket(DocumentationType.SWAGGER_2)
-                .enable(swaggerShow)
                 .apiInfo(apiInfo())
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("com.rookiefly.open.urlshortener.controller"))
