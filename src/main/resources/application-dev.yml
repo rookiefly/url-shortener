@@ -18,3 +18,8 @@ spring:
     password: ''
     port: 6379
     timeout: 3000
+swagger:
+  open: true
+url-shortener:
+  baseurl: http://localhost:8989/
+  strategy: hash

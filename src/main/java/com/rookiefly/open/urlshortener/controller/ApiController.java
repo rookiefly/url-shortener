@@ -56,7 +56,8 @@ public class ApiController {
         if (StringUtils.isEmpty(shortUrl)) {
             return ApiResponse.newParamError();
         }
-        String longUrl = linksService.restoreShortUrl(shortUrl);
+        String keyword = StringUtils.substringAfterLast(shortUrl, "/");
+        String longUrl = linksService.restoreShortUrl(keyword);
         if (StringUtils.isEmpty(longUrl)) {
             return ApiResponse.newNotFound();
         }

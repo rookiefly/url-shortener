@@ -31,10 +31,10 @@ public class OrderIdGeneratorService {
     }
 
     /**
-     * @param key
-     * @param prefix
-     * @param hasExpire
-     * @param minLength
+     * @param key       redis中的key值
+     * @param prefix    最后编码的前缀
+     * @param hasExpire redis 是否使用过期时间设置自增id
+     * @param minLength redis生成的自增id的最小长度，如果小于这个长度前面补0
      * @return String
      * @Title: generateCode
      * @Description: 生成自定义前缀的类似 ORDER201810120001格式的自增数

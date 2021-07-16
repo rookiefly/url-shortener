@@ -57,8 +57,3 @@ spring:
     suffix: .html
   profiles:
     active: dev
-swagger:
-  open: true
-url-shortener:
-  baseurl: http://w9x.top/
-  strategy: hash

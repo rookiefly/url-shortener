@@ -27,9 +27,8 @@ public class LinksServiceImpl implements LinksService {
     private ShortUrlGeneratorStrategy shortUrlGeneratorStrategy;
 
     @Override
-    @Cacheable(value = "urlCache", key = "targetClass + methodName + #shortUrl")
-    public String restoreShortUrl(String shortUrl) {
-        String keyword = StringUtils.substringAfterLast(shortUrl, "/");
+    @Cacheable(value = "urlCache", key = "targetClass + methodName + #keyword")
+    public String restoreShortUrl(String keyword) {
         if (StringUtils.isEmpty(keyword)) {
             return null;
         }
