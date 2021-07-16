@@ -8,7 +8,10 @@ spring:
   cache:
     cache-names: urlCache
     caffeine:
-      spec: maximumSize=500,expireAfterAccess=600s
+      spec: maximumSize=500,expireAfterAccess=60s
+    type: redis
+    redis:
+      time-to-live: 60s
   datasource:
     hikari:
       connectionTimeout: 30000

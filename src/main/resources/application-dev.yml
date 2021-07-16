@@ -23,5 +23,5 @@ spring:
 swagger:
   open: true
 url-shortener:
-  baseurl: http://localhost:8989/
+  baseurl: http://localhost:8989/s/
   strategy: hash

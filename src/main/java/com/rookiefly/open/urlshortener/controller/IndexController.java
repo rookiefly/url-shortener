@@ -20,7 +20,7 @@ public class IndexController {
         return "index";
     }
 
-    @RequestMapping(value = "/{keyword}", method = RequestMethod.GET)
+    @RequestMapping(value = "/s/{keyword}", method = RequestMethod.GET)
     public String redirect(@PathVariable String keyword) {
         String longUrl = linksService.restoreShortUrl(keyword);
         if (StringUtils.isEmpty(longUrl)) {
