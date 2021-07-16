@@ -7,5 +7,7 @@
 - `Redis 2.8+`
 - `Maven 3.5+`
 
+`注意：JVM启动参数设置：-Djasypt.encryptor.password=123456`
+
 ### 页面预览
 ![demo](snapshot.png)
