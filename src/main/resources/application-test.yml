@@ -1,6 +1,7 @@
+server:
+  port: 8989
 spring:
   datasource:
-    data: classpath:sql/data.sql
     driver-class-name: com.mysql.cj.jdbc.Driver
     password: ENC(W5p2CjSM+dafOGhlhKaKx3hriew7tlfwYWxdHJwYMdn7Px2o1uCEzsWGEq0UgJlZ)
     schema: classpath:sql/schema.sql

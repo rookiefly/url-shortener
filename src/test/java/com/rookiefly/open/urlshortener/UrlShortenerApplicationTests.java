@@ -2,7 +2,6 @@ package com.rookiefly.open.urlshortener;
 
 import com.rookiefly.open.urlshortener.mapper.LinksMapper;
 import com.rookiefly.open.urlshortener.model.Links;
-import com.rookiefly.open.urlshortener.service.OrderIdGeneratorService;
 import com.rookiefly.open.urlshortener.util.ConversionUtil;
 import org.junit.Assert;
 import org.junit.Test;
@@ -19,9 +18,6 @@ public class UrlShortenerApplicationTests {
     @Resource
     private LinksMapper linksMapper;
 
-    @Resource
-    private OrderIdGeneratorService orderIdGeneratorService;
-
     @Test
     public void testInsert() {
         Links links = new Links();
@@ -34,13 +30,6 @@ public class UrlShortenerApplicationTests {
         Assert.assertEquals(1, linksMapper.update(keyword, id));
         Assert.assertEquals("http://google.com", this.linksMapper.findByKeyword("000002").getUrl());
 
-    }
-
-    @Test
-    public void testIdGenerator() {
-        String orderId = orderIdGeneratorService.generateOrderId();
-        System.out.println(orderId);
-        Assert.assertNotNull(orderId);
     }
 
 }

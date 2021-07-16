@@ -1,3 +1,32 @@
+server:
+  tomcat:
+    mbeanregistry:
+      enabled: true
+spring:
+  application:
+    name: springboot-urlshortener
+  cache:
+    cache-names: urlCache
+    caffeine:
+      spec: maximumSize=500,expireAfterAccess=600s
+  datasource:
+    hikari:
+      connectionTimeout: 30000
+      idleTimeout: 30000
+      maxLifetime: 2000000
+      maximumPoolSize: 20
+      minimumIdle: 5
+      poolName: urlShortenerHikariCP
+    initialization-mode: ALWAYS
+  thymeleaf:
+    cache: false
+    check-template-location: true
+    encoding: UTF-8
+    mode: HTML
+    prefix: classpath:/templates/
+    suffix: .html
+  profiles:
+    active: dev
 jasypt:
   encryptor:
     algorithm: PBEWITHHMACSHA512ANDAES_256
@@ -27,33 +56,3 @@ mybatis:
     map-underscore-to-camel-case: true
   mapper-locations: classpath:mybatis/mapper/*.xml
   type-aliases-package: com.rookiefly.open.urlshortener.model
-server:
-  port: 8989
-  tomcat:
-    mbeanregistry:
-      enabled: true
-spring:
-  application:
-    name: springboot-urlshortener
-  cache:
-    cache-names: urlCache
-    caffeine:
-      spec: maximumSize=500,expireAfterAccess=600s
-  datasource:
-    hikari:
-      connectionTimeout: 30000
-      idleTimeout: 30000
-      maxLifetime: 2000000
-      maximumPoolSize: 20
-      minimumIdle: 5
-      poolName: urlShortenerHikariCP
-    initialization-mode: ALWAYS
-  thymeleaf:
-    cache: false
-    check-template-location: true
-    encoding: UTF-8
-    mode: HTML
-    prefix: classpath:/templates/
-    suffix: .html
-  profiles:
-    active: dev

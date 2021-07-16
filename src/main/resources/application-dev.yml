@@ -1,3 +1,5 @@
+server:
+  port: 8989
 spring:
   datasource:
     password: ENC(W5p2CjSM+dafOGhlhKaKx3hriew7tlfwYWxdHJwYMdn7Px2o1uCEzsWGEq0UgJlZ)
